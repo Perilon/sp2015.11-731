@@ -57,7 +57,7 @@ def em():
 
 
 def printmatches():
-    for pair in full_bitext:
+    for pair in bitext[:150]:
         matches = defaultdict(float)
         for english_word in pair[1]:
             for german_word in pair[0]:

@@ -1,4 +1,4 @@
-Basic model 1 aligner seems to be working more or less properly(?)  My computer seems too weak to train on much data so I need to remedy this.
+Basic model 1 aligner seems to be working more or less properly(?)  Except it's not up to the baseline yet so who knows.   Trained on 1000 lines, 6 iterations of EM.
 
 
 There are three Python programs here (`-h` for usage):
