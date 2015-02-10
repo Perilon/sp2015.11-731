@@ -1,4 +1,4 @@
-Basic model 1 aligner is doing fine, although I still can't manage to get my computer to train on all 100,000 lines.  Also even though the test indicates that it's at about .44 AER, nothing is changing on the leaderboard, so something's the matter.
+Basic model 1 aligner is doing fine, although I still can't manage to get my computer to train on all 100,000 lines.  My output.txt is from 50,000 lines, 5 iterations.  Also even though running the test indicates that it's at about .44 AER, nothing is changing on the leaderboard, so something's the matter.
 
 
 There are three Python programs here (`-h` for usage):
