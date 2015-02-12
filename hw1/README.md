@@ -1,4 +1,4 @@
-Model 2 working, though it takes longer to train than I'd like.  Not sure whether it's my code that's slow or my computer (likely both).  Not able to train on all the data.  Ran model2-300_output-score2.py on 40,000 lines, 5 iterations.
+Model 2 working.  Run on 50,000 lines, 5 iterations.
 
 
 There are three Python programs here (`-h` for usage):
