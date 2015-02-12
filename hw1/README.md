@@ -1,4 +1,4 @@
-Basic model 1 aligner is doing fine, although I still can't manage to get my computer to train on all 100,000 lines.  My output.txt is from 50,000 lines, 5 iterations.  Also even though running the test indicates that it's at about .44 AER, nothing is changing on the leaderboard, so something's the matter.
+Model 2 working, though it takes longer to train than I'd like.  Not sure whether it's my code that's slow or my computer (likely both).  Not able to train on all the data.  Ran model2-300_output-score2.py on 40,000 lines, 5 iterations.
 
 
 There are three Python programs here (`-h` for usage):
