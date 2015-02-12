@@ -1,4 +1,4 @@
-Model 2 working.  Run on 65,000 lines, 5 iterations.
+Model 2 working.  Run on 100,000 lines, 5 iterations.
 
 
 There are three Python programs here (`-h` for usage):
