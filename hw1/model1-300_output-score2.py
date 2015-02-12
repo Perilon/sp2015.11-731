@@ -22,15 +22,31 @@ translation_probability = defaultdict(float)
 
 for pair in bitext:
     for german_word in pair[0]:
-        german_word = german_word.lower()
+        full_german_wordset.append(german_word)
 
+for pair in bitext:
     for english_word in pair[1]:
-        english_word = english_word.lower()
+        full_english_wordset.append(english_word)
+
+english_wordset = set(full_english_wordset)
+german_wordset = set(full_german_wordset)
+
+#print len(english_wordset)
+#print len(german_wordset)
 
 for pair in bitext:
     for german_word in pair[0]:
         for english_word in pair[1]:
             translation_probability[(english_word, german_word)] = 0.2
+
+#for english_word in english_wordset:
+#    for german_word in german_wordset:
+#        translation_probability[(english_word, german_word)] = 0.2
+
+#print len(translation_probability.items())
+#print (len(english_wordset) * len(german_wordset)) / len(translation_probability.items())
+
+#print translation_probability.keys()[:20]
 
 
 def em():
@@ -78,7 +94,7 @@ def em():
 ##        sys.stdout.write("\n")
 
 def printmatches3():
-    for pair in full_bitext[:150]:
+    for pair in full_bitext[:300]:
         for (english_word_index, english_word) in enumerate(pair[1]):
 ##            best_match = 0
             best_score = 0
