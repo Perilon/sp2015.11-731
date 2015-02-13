@@ -35,3 +35,7 @@ try:
     sys.stderr.write("WARNING (%s): bitext is longer than alignment\n" % sys.argv[0])
 except (StopIteration):
   pass
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 4667359137cf1b0144b98dc81214e8a11acb2025

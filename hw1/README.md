@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 Model 2 working.  Run on 100,000 lines, 7 iterations.
 
 
+=======
+>>>>>>> 4667359137cf1b0144b98dc81214e8a11acb2025
 There are three Python programs here (`-h` for usage):
 
  - `./align` aligns words using Dice's coefficient.
