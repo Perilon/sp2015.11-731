@@ -57,9 +57,18 @@ def main():
     for h1, h2, ref in islice(sentences(), opts.num_sentences):
         h1_val = simple_meteor(h1, ref, opts.alpha, opts.delta)
         h2_val = simple_meteor(h2, ref, opts.alpha, opts.delta)
-        print(-1 if h1_val > h2_val else # \begin{cases}
-                (0 if h1_val == h2_val
-                    else 1)) # \end{cases}
+
+        if h1_val != 0 and h2_val != 0:
+		if (h1_val / h2_val) > 1.0002:
+			print -1
+		elif (h1_val / h2_val) <= 1.0002 and (h1_val / h2_val) >= 0.9998:
+			print 0
+		else:
+			print 1
+	elif h2_val == 0:
+		print -1
+	else:
+		print 1
  
 # convention to allow import of this file as a module
 if __name__ == '__main__':
