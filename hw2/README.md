@@ -1,5 +1,6 @@
-Used cnakos' code as a base, added a delta parameter option and some function words.  Defined what outputs 0 a little more broadly.
+---Eliminating various punctuation
 
+---Used cnakos' code as a base, added a delta parameter option and some function words.  Defined what outputs 0 a little more broadly.
 
 There are three Python programs here (`-h` for usage):
 
