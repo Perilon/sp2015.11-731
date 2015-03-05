@@ -133,7 +133,7 @@ def main():
         def sentences():
                 with open(opts.input) as f:
                         for pair in f:
-                                yield [sentence.decode('UTF-8').strip().split() for sentence in pair.translate(None, """.,'"?:;/\*!-""").lower().split(' ||| ')]
+                                yield [sentence.decode('UTF-8').strip().split() for sentence in pair.translate(None, """~`!@#$%^&*()_+-={}[]\:;"'<>,.?/""").lower().split(' ||| ')]
  
         # note: the -n option does not work in the original code
         for h1, h2, reference in islice(sentences(), opts.num_sentences):
