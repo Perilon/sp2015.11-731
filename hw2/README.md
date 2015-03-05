@@ -1,3 +1,5 @@
+---Did some obnoxious stuff with WordNet synsets for a modicum of improvement.  Have a matcher weight for that category too now.  I think this isn't the most fruitful approach to finding words that share similar meanings, and it takes a long time to run.
+
 ---Implemented matcher weights for exact matches and stemmed matches
 
 ---Eliminating various punctuation

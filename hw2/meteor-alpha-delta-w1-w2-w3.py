@@ -113,18 +113,25 @@ def simple_meteor(hypothesis, reference, alpha, delta, w_exact, w_stems, w_synon
                                         best_matches.append(item)
                                 return best_match
 
+##        print "Leftover_content_hyp = ", Leftover_content_hyp
+##        print "Leftover_content_ref = ", Leftover_content_ref
+
         def find_synonyms(Leftover_content_hyp, Leftover_content_ref):
                 best_synonyms_dict = {}
                 word1_scores = {}
-                for word1 in Leftover_content_hyp:
-                        word1_scores[word1] = 0
-                        for word2 in Leftover_content_ref:
-                                sim = path_similarity(word1, word2)
-                                if sim > word1_scores[word1]:
-                                        word1_scores[word1] = sim
-                                        best_match_of_word1 = word2
-                        best_synonyms_dict[(word1, best_match_of_word1)] = word1_scores[word1]
-                return best_synonyms_dict
+                if len(Leftover_content_hyp) != 0 and len(Leftover_content_ref) != 0:
+                        for word1 in Leftover_content_hyp:
+                                word1_scores[word1] = 0
+                                for word2 in Leftover_content_ref:
+                                        sim = path_similarity(word1, word2)
+                                        best_match_of_word1 = None
+                                        if sim > word1_scores[word1]:
+                                                word1_scores[word1] = sim
+                                                best_match_of_word1 = word2
+                                best_synonyms_dict[(word1, best_match_of_word1)] = word1_scores[word1]
+                        return best_synonyms_dict
+                else:
+                        return best_synonyms_dict
 
         content_synonyms_hyp = []
         content_synonyms_ref = []
