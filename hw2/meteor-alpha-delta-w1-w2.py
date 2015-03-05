@@ -8,9 +8,6 @@ from nltk.stem.porter import *
 import codecs
 stemmer = PorterStemmer()
 
-alpha = .80
-delta = .65
-
 function_words = ["you", "i", "to", "the", "a", "and", "that", "it", "of", "me", "what", "is", "in", "this", "know", "i'm", "for", "no", "have", "my", "don't", "just", "not", "do", "be", "on", "your", "was", "we", "it's", "with", "so", "but", "all", "well", "are", "he", "oh", "about", "right"]
 
 C_function = Counter(function_words)
