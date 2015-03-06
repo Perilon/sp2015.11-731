@@ -1,3 +1,15 @@
+---So, "meteor-alpha-delta-w1-w2-w3.py" is my version that has output the best results, with parameters alpha = .8, delta = .65, w_exact = 1, w_stems = .6, and w_synonyms = .8 (I think that's what it was?).  I have also worked on a version that eschews the content/function word dichotomy and seeks to sort and weight words by a more fine-grained POS distinction.
+
+"Meteor-new-approach.py" has a noun-verb-other distinction with delta parameters for each (that should be made sure to sum to 1), and supports matching by exact match and by stems.
+
+"Meteor-new-approach-nvao.py" has a noun-verb-adjective/adverb-other distinction, with delta parameters for each and matches by exact match and by stems.
+
+An informal survey of results indicates that relatively few words are left over from the exact matches for the stemmed matches possibility to kick in, but it does occasionally.
+
+I'm still playing around with tuning the parameters to get the best results for this line of approach.  The way the defaults are set right now gets 0.517437.
+
+--------------------------------------------------------------
+
 ---Did some obnoxious stuff with WordNet synsets for a modicum of improvement.  Have a matcher weight for that category too now.  I think this isn't the most fruitful approach to finding words that share similar meanings, and it takes a long time to run.
 
 ---Implemented matcher weights for exact matches and stemmed matches
