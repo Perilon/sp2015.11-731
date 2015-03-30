@@ -3,23 +3,29 @@
 import sys
 from collections import namedtuple
 
-# A translation model is a dictionary where keys are tuples of French words
+# A translation model is a dictionary where keys are tuples of Spanish words
 # and values are lists of (english, logprob) named tuples. For instance,
 # the French phrase "que se est" has two translations, represented like so:
 # tm[('que', 'se', 'est')] = [
 #     phrase(english='what has', logprob=-0.301030009985), 
 #     phrase(english='what has been', logprob=-0.301030009985)]
 # k is a pruning parameter: only the top k translations are kept for each f.
+
 phrase = namedtuple("phrase", "english, logprob")
+
 def TM(filename, k):
     sys.stderr.write("Reading translation model from %s...\n" % (filename,))
     tm = {}
     for line in open(filename).readlines():
+	#print "\n", "line = ", line, "\n"
         (f, e, logprob) = line.strip().split(" ||| ")
+	#print "(f, e, logprob) =", (f, e, logprob)
         tm.setdefault(tuple(f.split()), []).append(phrase(e, float(logprob)))
+	#print tm.keys()
     for f in tm: # prune all but top k translations
         tm[f].sort(key=lambda x: -x.logprob)
         del tm[f][k:] 
+    #print tm.items()[:10], "\n"
     return tm
 
 # # A language model scores sequences of English words, and must account
