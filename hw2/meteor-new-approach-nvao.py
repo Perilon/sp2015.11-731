@@ -181,9 +181,9 @@ def main():
         parser.add_argument('-n', '--num_sentences', default=None, type=int,
                 help='Number of hypothesis pairs to evaluate')
         parser.add_argument('-a', '--alpha', default=0.8, type=float, help='precision/recall weight parameter')
-        parser.add_argument('-dn', '--delta_nouns', default=.35, type=float, help='noun weight parameter')
+        parser.add_argument('-dn', '--delta_nouns', default=.40, type=float, help='noun weight parameter')
         parser.add_argument('-dv', '--delta_verbs', default=.25, type=float, help='verb weight parameter')
-        parser.add_argument('-da', '--delta_adjadvs', default=.35, type=float, help='adjective/adverb weight parameter')
+        parser.add_argument('-da', '--delta_adjadvs', default=.30, type=float, help='adjective/adverb weight parameter')
         parser.add_argument('-do', '--delta_other', default=.05, type=float, help='other weight parameter')
         
         parser.add_argument('-w1', '--w_exact', default=1, type=float, help='exact matches matcher weight')

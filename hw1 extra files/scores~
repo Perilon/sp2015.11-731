@@ -1,0 +1,70 @@
+scores:
+
+output-1000-4-s (print1)
+
+Precision = 0.418332
+Recall = 0.478506
+AER = 0.554732
+
+
+output-1000-6-s (print1)
+
+Precision = 0.424615
+Recall = 0.487315
+AER = 0.547319
+
+
+600-5-s (print2)
+
+Precision = 0.410908
+Recall = 0.469697
+AER = 0.562776
+
+10000-5-s (print2)
+
+Precision = 0.493432
+Recall = 0.565187
+AER = 0.474448
+
+
+
+20000-5 (print1)
+Precision = 0.510565
+Recall = 0.582452
+AER = 0.457256
+
+20000-5 (print2)
+Precision = 0.510851
+Recall = 0.583157
+AER = 0.456782
+
+2-20000-5-2
+Precision = 0.530840
+Recall = 0.600775
+AER = 0.437855
+
+50000-5 (print2)
+Precision = 0.530268
+Recall = 0.600423
+AER = 0.438328
+
+2-2000-3-2
+Precision = 0.451171
+Recall = 0.512333
+AER = 0.521451
+
+1-2000-3-2
+Precision = 0.423472
+Recall = 0.483087
+AER = 0.549842
+
+1-2000-5-2
+Precision = 0.446031
+Recall = 0.510218
+AER = 0.525237
+
+2-2000-5-2
+Precision = 0.456025
+Recall = 0.520789
+AER = 0.514984
+
