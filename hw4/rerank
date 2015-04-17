@@ -16,7 +16,8 @@ parser.add_argument('--ttable', '-t', default='data/ttable')
 args = parser.parse_args()
 
 translation_table = read_ttable(args.ttable)
-weights = {'log_prob_tgs': 1.0}
+#weights = {'log_prob_tgs': 1.0}
+weights = {'log_prob_tgs': 66410.67506548, "log_prob_sgt": 24091.69490371, "log_lex_prob_tgs": 77839.00566142, "log_lex_prob_sgt": 34123.60950552}
 
 for line in open(args.input):
 	left_context, phrase, right_context = [part.strip() for part in line.decode('utf-8').strip().split('|||')]
