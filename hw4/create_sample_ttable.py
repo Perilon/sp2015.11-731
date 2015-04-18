@@ -1,0 +1,1 @@
+cat data/ttable | grep '^\(again\|along\|access\|adopted\|action\|afghanistan\|achieved\|actions\|among\|advantage\|african\|activities\|agreed|\agree|\address\|adopted\|analysis\) |||' > data/sample.ttable

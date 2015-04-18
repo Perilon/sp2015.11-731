@@ -41,7 +41,7 @@ w1, w2, w3, w4 = weights["log_prob_tgs"], weights["log_prob_sgt"], weights["log_
 
 w = np.array([w1, w2, w3, w4])
 
-alpha = .001
+alpha = .0001
 gamma = .1
 iterations = 5
 
