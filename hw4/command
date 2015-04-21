@@ -1,0 +1,1 @@
+python rerank-hw-2 -i data/sample2.input -t data/ttable -r data/sample2.refs | ./check | ./grade

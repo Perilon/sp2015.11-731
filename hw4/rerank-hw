@@ -34,14 +34,14 @@ refs = fo.readlines()
 translation_table = read_ttable(args.ttable)
 
 rand_init_weights = np.random.random(4) * 0.1
-#weights = {'log_prob_tgs': .1, "log_prob_sgt": .1, "log_lex_prob_tgs": .1, "log_lex_prob_sgt": .1}
+#weights = {'log_prob_tgs': 1, "log_prob_sgt": 0, "log_lex_prob_tgs": 0, "log_lex_prob_sgt": 0}
 weights = {'log_prob_tgs': rand_init_weights[0], "log_prob_sgt": rand_init_weights[1], "log_lex_prob_tgs": rand_init_weights[2], "log_lex_prob_sgt": rand_init_weights[3]}
 
 w1, w2, w3, w4 = weights["log_prob_tgs"], weights["log_prob_sgt"], weights["log_lex_prob_tgs"], weights["log_lex_prob_sgt"]
 
 w = np.array([w1, w2, w3, w4])
 
-alpha = .001
+alpha = .00001
 gamma = .1
 iterations = 5
 
@@ -113,8 +113,8 @@ for iters in range(iterations):
 	sys.stderr.write("w = %s \n" % str(w))
 	sys.stderr.write("total loss = %s \n" % str(total_corpus_loss))
 
-sys.stderr.write(str(total_loss_table))
-sys.stderr.write(str(w_table))
+sys.stderr.write("%s\n" % str(total_loss_table))
+sys.stderr.write("%s\n" % str(w_table))
 
 final_weights = {'log_prob_tgs': w[0], "log_prob_sgt": w[1], "log_lex_prob_tgs": w[2], "log_lex_prob_sgt": w[3]}
 
