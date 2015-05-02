@@ -25,9 +25,9 @@ def Loss(x, y, w, gamma):
 	return max(0, (gamma - (np.dot((y - x), w))))
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--input', '-i', default='data/train.input')
+parser.add_argument('--input', '-i', default='data/sample100-2.input')
 parser.add_argument('--ttable', '-t', default='data/ttable')
-parser.add_argument('--refs', '-r', default='data/train.refs')
+parser.add_argument('--refs', '-r', default='data/sample100-2.refs')
 args = parser.parse_args()
 
 fo = open(args.refs)
@@ -95,7 +95,7 @@ len_all = len_prev + len_Next
 translation_table = read_ttable(args.ttable)
 
 #rand_init_weights = np.random.random(4) * 0.1
-weights = {'log_prob_tgs': 0.1, "log_prob_sgt": 0.1, "log_lex_prob_tgs": 0.1, "log_lex_prob_sgt": 0.1}
+weights = {'log_prob_tgs': 0.0, "log_prob_sgt": 0.0, "log_lex_prob_tgs": 0.0, "log_lex_prob_sgt": 0.0}
 #weights = {'log_prob_tgs': rand_init_weights[0], "log_prob_sgt": rand_init_weights[1], "log_lex_prob_tgs": rand_init_weights[2], "log_lex_prob_sgt": rand_init_weights[3]}
 
 w1, w2, w3, w4 = weights["log_prob_tgs"], weights["log_prob_sgt"], weights["log_lex_prob_tgs"], weights["log_lex_prob_sgt"]
@@ -105,9 +105,9 @@ zeros_prev = np.zeros(len_prev)
 zeros_Next = np.zeros(len_Next)
 w = np.append(np.append(w_first_part, zeros_prev), zeros_Next)
 
-alpha = .0001
-gamma = .1
-iterations = 6
+alpha = .01
+gamma = .01
+iterations = 5
 
 w_table = np.zeros([iterations, 4])
 total_loss_table = np.zeros([iterations, 1])
