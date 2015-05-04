@@ -1,3 +1,7 @@
+See "final.py" for the operative version.
+
+This took a really, really, really long time to implement to the level of passing the baseline.   There's like hundreds of failed attempts sitting around.   What ended up working?   Various features that are pretty standard, but it's combining them right and getting the parameters are the right starting values that is tricky.   Plus it takes a friggin' long time to run these things on more than 5-10 thousand lines.   Plus my code got really unwieldy and could do with an overhaul or having been planned better (not that I knew what I was doing when I started).   It's not pretty.   At least it works now!
+
 There are three Python programs here (`-h` for usage):
 
  - `./rerank` a simple reranker that simply sorts candidate translations on log p(czech|english)
