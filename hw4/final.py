@@ -137,6 +137,8 @@ parentrel_ft_strings = []
 parentPOS_ft_strings = []
 prev2_ft_strings = []
 Next2_ft_strings = []
+prevPOS_POS_ft_strings = []
+NextPOS_POS_ft_strings = []
 
 incomplete_phrase_ft_strings = []
 incomplete_prev_ft_strings = []
@@ -148,7 +150,8 @@ incomplete_parentrel_ft_strings = []
 incomplete_parentPOS_ft_strings = []
 incomplete_prev2_ft_strings = []
 incomplete_Next2_ft_strings = []
-
+incomplete_prevPOS_POS_ft_strings = []
+incomplete_NextPOS_POS_ft_strings = []
 
 input_line_index = -1
 for line in read_input:
@@ -156,8 +159,8 @@ for line in read_input:
 	#print "input_line_index =", input_line_index
 	left_context, phrase, right_context = [part.strip() for part in line.decode('utf-8').strip().split('|||')]
 
-	#sentence = left_context + " " + phrase + " " + right_context
-	#sentence = sentence.split()
+	sentence = left_context + " " + phrase + " " + right_context
+	sentence = sentence.split()
 
 	left_context = left_context.strip().split()
 	right_context = right_context.strip().split()
@@ -206,8 +209,29 @@ for line in read_input:
 		root_ft_str = "root:" + phrase + correct_czech[-2:]
 		root_ft_strings_1.append(root_ft_str)
 
-	#print "POS_list[input_line_index] =", POS_list[input_line_index]
+
 	POS = POS_list[input_line_index][phrase_index]
+
+	if len(left_context) > 1:
+		prev2POS = POS_list[input_line_index][phrase_index-2]
+		prevPOS = POS_list[input_line_index][phrase_index-1]
+	elif len(left_context) == 1:
+		prev2POS = "<s>"
+		prevPOS = POS_list[input_line_index][phrase_index-1]
+	else:
+		prev2POS = "<s>"
+		prevPOS = "<s>"
+
+	if len(right_context) > 1:
+		NextPOS = POS_list[input_line_index][phrase_index+1]
+		Next2POS = POS_list[input_line_index][phrase_index+2]
+	elif len(right_context) == 1:
+		NextPOS = POS_list[input_line_index][phrase_index+1]
+		Next2POS = "</s>"
+	else:
+		NextPOS = "</s>"
+		Next2POS = "</s>"
+
 
 	parrel = parents_list[input_line_index][phrase_index][1]
 	if parents_list[input_line_index][phrase_index][0] != None:
@@ -224,6 +248,8 @@ for line in read_input:
 	parentPOS_ft_str = "parentPOS:" + parPOS + "_tgt:" + correct_czech[-2:]
 	prev2_ft_str = "src:" + phrase + "_tgt:" + correct_czech + "_prev2:" + prev2 + prev
 	Next2_ft_str = "src:" + phrase + "_tgt:" + correct_czech + "_next2:" + Next + Next2
+	prevPOS_POS_ft_str = "src:" + phrase + "_tgt:" + correct_czech + "_prev:" + prev2POS + prevPOS
+	NextPOS_POS_ft_str = "src:" + phrase + "_tgt:" + correct_czech + "_next:" + NextPOS + Next2POS
 
 	incomplete_phrase_ft_str = "src:" + phrase + "_tgt:" + correct_czech
 	incomplete_prev_ft_str = "src:" + phrase + "_tgt:" + correct_czech
@@ -235,6 +261,8 @@ for line in read_input:
 	incomplete_parentPOS_ft_str = "parentPOS:" + parPOS + "_tgt:" + correct_czech[-2:]
 	incomplete_prev2_ft_str = "src:" + phrase + "_tgt:" + correct_czech
 	incomplete_Next2_ft_str = "src:" + phrase + "_tgt:" + correct_czech
+	incomplete_prevPOS_POS_ft_str = "src:" + phrase + "_tgt:" + correct_czech
+	incomplete_NextPOS_POS_ft_str = "src:" + phrase + "_tgt:" + correct_czech
 
 
 	#incomplete_root_ft_str = "root:" + phrase + correct_czech[-2:]
@@ -252,6 +280,8 @@ for line in read_input:
 	parentPOS_ft_strings.append(parentPOS_ft_str)
 	prev2_ft_strings.append(prev2_ft_str)
 	Next2_ft_strings.append(Next2_ft_str)
+	prevPOS_POS_ft_strings.append(prevPOS_POS_ft_str)
+	NextPOS_POS_ft_strings.append(NextPOS_POS_ft_str)
 
 	incomplete_phrase_ft_strings.append(incomplete_phrase_ft_str)
 	incomplete_prev_ft_strings.append(incomplete_prev_ft_str)
@@ -263,6 +293,8 @@ for line in read_input:
 	incomplete_parentPOS_ft_strings.append(incomplete_parentPOS_ft_str)
 	incomplete_prev2_ft_strings.append(incomplete_prev2_ft_str)
 	incomplete_Next2_ft_strings.append(incomplete_Next2_ft_str)
+	incomplete_prevPOS_POS_ft_strings.append(incomplete_prevPOS_POS_ft_str)
+	incomplete_NextPOS_POS_ft_strings.append(incomplete_NextPOS_POS_ft_str)
 
 phrase_ft_strings = sorted(set(phrase_ft_strings))
 prev_ft_strings = sorted(set(prev_ft_strings))
@@ -274,6 +306,8 @@ parentrel_ft_strings = sorted(set(parentrel_ft_strings))
 parentPOS_ft_strings = sorted(set(parentPOS_ft_strings))
 prev2_ft_strings = sorted(set(prev2_ft_strings))
 Next2_ft_strings = sorted(set(Next2_ft_strings))
+prevPOS_POS_ft_strings = sorted(set(prevPOS_POS_ft_strings))
+NextPOS_POS_ft_strings = sorted(set(NextPOS_POS_ft_strings))
 
 incomplete_phrase_ft_strings = sorted(set(incomplete_phrase_ft_strings))
 incomplete_prev_ft_strings = sorted(set(incomplete_prev_ft_strings))
@@ -285,6 +319,8 @@ incomplete_parentrel_ft_strings = sorted(set(incomplete_parentrel_ft_strings))
 incomplete_parentPOS_ft_strings = sorted(set(incomplete_parentPOS_ft_strings))
 incomplete_prev2_ft_strings = sorted(set(incomplete_prev2_ft_strings))
 incomplete_Next2_ft_strings = sorted(set(incomplete_Next2_ft_strings))
+incomplete_prevPOS_POS_ft_strings = sorted(set(incomplete_prevPOS_POS_ft_strings))
+incomplete_NextPOS_POS_ft_strings = sorted(set(incomplete_NextPOS_POS_ft_strings))
 
 phrase_ft_strings_dict = {}
 prev_ft_strings_dict = {}
@@ -296,6 +332,8 @@ parentrel_ft_strings_dict = {}
 parentPOS_ft_strings_dict = {}
 prev2_ft_strings_dict = {}
 Next2_ft_strings_dict = {}
+prevPOS_POS_ft_strings_dict = {}
+NextPOS_POS_ft_strings_dict = {}
 
 incomplete_phrase_ft_strings_dict = {}
 incomplete_prev_ft_strings_dict = {}
@@ -307,6 +345,8 @@ incomplete_parentrel_ft_strings_dict = {}
 incomplete_parentPOS_ft_strings_dict = {}
 incomplete_prev2_ft_strings_dict = {}
 incomplete_Next2_ft_strings_dict = {}
+incomplete_prevPOS_POS_ft_strings_dict = {}
+incomplete_NextPOS_POS_ft_strings_dict = {}
 
 for i, item in enumerate(phrase_ft_strings):
 	phrase_ft_strings_dict[item] = i
@@ -328,6 +368,10 @@ for i, item in enumerate(prev2_ft_strings):
 	prev2_ft_strings_dict[item] = i
 for i, item in enumerate(Next2_ft_strings):
 	Next2_ft_strings_dict[item] = i
+for i, item in enumerate(prevPOS_POS_ft_strings):
+	prevPOS_POS_ft_strings_dict[item] = i
+for i, item in enumerate(NextPOS_POS_ft_strings):
+	NextPOS_POS_ft_strings_dict[item] = i
 
 for i, item in enumerate(incomplete_phrase_ft_strings):
 	incomplete_phrase_ft_strings_dict[item] = i
@@ -349,6 +393,10 @@ for i, item in enumerate(incomplete_prev2_ft_strings):
 	incomplete_prev2_ft_strings_dict[item] = i
 for i, item in enumerate(incomplete_Next2_ft_strings):
 	incomplete_Next2_ft_strings_dict[item] = i
+for i, item in enumerate(incomplete_prevPOS_POS_ft_strings):
+	incomplete_prevPOS_POS_ft_strings_dict[item] = i
+for i, item in enumerate(incomplete_NextPOS_POS_ft_strings):
+	incomplete_NextPOS_POS_ft_strings_dict[item] = i
 
 len_phr = len(phrase_ft_strings)
 len_prev = len(prev_ft_strings)
@@ -360,8 +408,10 @@ len_parentrel = len(parentrel_ft_strings)
 len_parentPOS = len(parentPOS_ft_strings)
 len_prev2 = len(prev2_ft_strings)
 len_Next2 = len(Next2_ft_strings)
+len_prevPOS_POS = len(prevPOS_POS_ft_strings)
+len_NextPOS_POS = len(NextPOS_POS_ft_strings)
 
-len_all = len_phr + len_prev + len_Next + len_root_ft_strings_1 + len_prev_POS + len_Next_POS + len_parentrel + len_parentPOS + len_prev2 + len_Next2
+len_all = len_phr + len_prev + len_Next + len_root_ft_strings_1 + len_prev_POS + len_Next_POS + len_parentrel + len_parentPOS + len_prev2 + len_Next2 + len_prevPOS_POS + len_NextPOS_POS
 	#print len_prev, len_Next, len_all
 #---------------------------------------------------------------------------
 
@@ -384,8 +434,10 @@ zeros_parentrel = np.zeros(len_parentrel)
 zeros_parentPOS = np.zeros(len_parentPOS)
 zeros_prev2 = np.zeros(len_prev2)
 zeros_Next2 = np.zeros(len_Next2)
+zeros_prevPOS_POS = np.zeros(len_prevPOS_POS)
+zeros_NextPOS_POS = np.zeros(len_NextPOS_POS)
 
-w = np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(w_first_part, zeros_phr), zeros_prev), zeros_Next), zeros_other), zeros_prev_POS), zeros_Next_POS), zeros_parentrel), zeros_parentPOS), zeros_prev2), zeros_Next2)
+w = np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(w_first_part, zeros_phr), zeros_prev), zeros_Next), zeros_other), zeros_prev_POS), zeros_Next_POS), zeros_parentrel), zeros_parentPOS), zeros_prev2), zeros_Next2), zeros_prevPOS_POS), zeros_NextPOS_POS)
 
 alpha = .0001
 gamma = .15
@@ -453,7 +505,29 @@ for iters in range(iterations):
 
 		correct_czech_stemmed = remove_accents(correct_czech[:SL])
 
+
 		POS = POS_list[input_line_index][phrase_index]
+
+		if len(left_context) > 1:
+			prev2POS = POS_list[input_line_index][phrase_index-2]
+			prevPOS = POS_list[input_line_index][phrase_index-1]
+		elif len(left_context) == 1:
+			prev2POS = "<s>"
+			prevPOS = POS_list[input_line_index][phrase_index-1]
+		else:
+			prev2POS = "<s>"
+			prevPOS = "<s>"
+
+		if len(right_context) > 1:
+			NextPOS = POS_list[input_line_index][phrase_index+1]
+			Next2POS = POS_list[input_line_index][phrase_index+2]
+		elif len(right_context) == 1:
+			NextPOS = POS_list[input_line_index][phrase_index+1]
+			Next2POS = "</s>"
+		else:
+			NextPOS = "</s>"
+			Next2POS = "</s>"
+
 
 		parrel = parents_list[input_line_index][phrase_index][1]
 		if parents_list[input_line_index][phrase_index][0] != None:
@@ -471,6 +545,8 @@ for iters in range(iterations):
 		zeros_parentPOS = np.zeros(len_parentPOS)
 		zeros_prev2 = np.zeros(len_prev2)
 		zeros_Next2 = np.zeros(len_Next2)
+		zeros_prevPOS_POS = np.zeros(len_prevPOS_POS)
+		zeros_NextPOS_POS = np.zeros(len_NextPOS_POS)
 
 		phrase_ft_str = "src:" + phrase + "_tgt:" + correct_czech
 		prev_ft_str = "src:" + phrase_stemmed + "_tgt:" + correct_czech_stemmed + "_prev:" + prev
@@ -482,6 +558,8 @@ for iters in range(iterations):
 		parentPOS_ft_str = "parentPOS:" + parPOS + correct_czech_stemmed[-2:]
 		prev2_ft_str = "src:" + phrase + "_tgt:" + correct_czech_stemmed + "_prev2:" + prev2 + prev
 		Next2_ft_str = "src:" + phrase + "_tgt:" + correct_czech_stemmed + "_next2:" + Next + Next2
+		prevPOS_POS_ft_str = "src:" + phrase + "_tgt:" + correct_czech + "_prev:" + prev2POS + prevPOS
+		NextPOS_POS_ft_str = "src:" + phrase + "_tgt:" + correct_czech + "_next:" + NextPOS + Next2POS
 			
 		if phrase_ft_strings_dict.get(phrase_ft_str, 0) != 0:
 			zeros_phr[phrase_ft_strings_dict[phrase_ft_str]] = 1
@@ -503,9 +581,13 @@ for iters in range(iterations):
 			zeros_prev2[prev2_ft_strings_dict[prev2_ft_str]] = 1
 		if Next2_ft_strings_dict.get(Next2_ft_str, 0) != 0:
 			zeros_Next2[Next2_ft_strings_dict[Next2_ft_str]] = 1
+		if prevPOS_POS_ft_strings_dict.get(prevPOS_POS_ft_str, 0) != 0:
+			zeros_prevPOS_POS[prevPOS_POS_ft_strings_dict[prevPOS_POS_ft_str]] = 1
+		if NextPOS_POS_ft_strings_dict.get(NextPOS_POS_ft_str, 0) != 0:
+			zeros_NextPOS_POS[NextPOS_POS_ft_strings_dict[NextPOS_POS_ft_str]] = 1
 
 		y_first_part = np.array([c1])
-		y = np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(y_first_part, zeros_phr), zeros_prev), zeros_Next), zeros_other), zeros_prev_POS), zeros_Next_POS), zeros_parentrel), zeros_parentPOS), zeros_prev2), zeros_Next2)
+		y = np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(y_first_part, zeros_phr), zeros_prev), zeros_Next), zeros_other), zeros_prev_POS), zeros_Next_POS), zeros_parentrel), zeros_parentPOS), zeros_prev2), zeros_Next2), zeros_prevPOS_POS), zeros_NextPOS_POS)
 		#print "y = ", y
 
 		incorrect_translations = removekey(translation_table[phrase], correct_czech)
@@ -528,6 +610,8 @@ for iters in range(iterations):
 			zeros_parentPOS = np.zeros(len_parentPOS)
 			zeros_prev2 = np.zeros(len_prev2)
 			zeros_Next2 = np.zeros(len_Next2)
+			zeros_prevPOS_POS = np.zeros(len_prevPOS_POS)
+			zeros_NextPOS_POS = np.zeros(len_NextPOS_POS)
 
 			wrong_phrase_ft_str = "src:" + phrase + "_tgt:" + incorrect_czech_word_stemmed
 			wrong_prev_ft_str = "src:" + phrase + "_tgt:" + incorrect_czech_word_stemmed + "_prev:" + prev
@@ -539,7 +623,9 @@ for iters in range(iterations):
 			wrong_parentPOS_ft_str = "parentPOS:" + parPOS + incorrect_czech_word_stemmed[-2:]
 			wrong_prev2_ft_str = "src:" + phrase + "_tgt:" + incorrect_czech_word_stemmed + "_prev:" + prev2 + prev
 			wrong_Next2_ft_str = "src:" + phrase + "_tgt:" + incorrect_czech_word_stemmed + "_next:" + Next + Next2
-			
+			wrong_prevPOS_POS_ft_str = "src:" + phrase + "_tgt:" + incorrect_czech_word_stemmed + "_prev:" + prev2POS + prevPOS
+			wrong_NextPOS_POS_ft_str = "src:" + phrase + "_tgt:" + incorrect_czech_word_stemmed + "_next:" + NextPOS + Next2POS
+
 			if phrase_ft_strings_dict.get(wrong_phrase_ft_str, 0) != 0:
 				zeros_phr[phrase_ft_strings_dict[wrong_phrase_ft_str]] = 1
 			if prev_ft_strings_dict.get(wrong_prev_ft_str, 0) != 0:
@@ -560,6 +646,10 @@ for iters in range(iterations):
 				zeros_prev2[prev2_ft_strings_dict[wrong_prev2_ft_str]] = 1
 			if Next2_ft_strings_dict.get(wrong_Next2_ft_str, 0) != 0:
 				zeros_Next2[Next2_ft_strings_dict[wrong_Next2_ft_str]] = 1
+			if prevPOS_POS_ft_strings_dict.get(wrong_prevPOS_POS_ft_str, 0) != 0:
+				zeros_prevPOS_POS[prevPOS_POS_ft_strings_dict[wrong_prevPOS_POS_ft_str]] = 1
+			if NextPOS_POS_ft_strings_dict.get(wrong_NextPOS_POS_ft_str, 0) != 0:
+				zeros_NextPOS_POS[NextPOS_POS_ft_strings_dict[wrong_NextPOS_POS_ft_str]] = 1
 
 
 			in1 = incorrect_translations[incorrect_czech_word]["log_prob_tgs"] #, incorrect_translations[incorrect_czech_word]["log_prob_sgt"], \
@@ -567,7 +657,7 @@ for iters in range(iterations):
 
 			temp_array = np.array([in1])
 
-			x[n] = np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(temp_array, zeros_phr), zeros_prev), zeros_Next), zeros_other), zeros_prev_POS), zeros_Next_POS), zeros_parentrel), zeros_parentPOS), zeros_prev2), zeros_Next2)
+			x[n] = np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(temp_array, zeros_phr), zeros_prev), zeros_Next), zeros_other), zeros_prev_POS), zeros_Next_POS), zeros_parentrel), zeros_parentPOS), zeros_prev2), zeros_Next2), zeros_prevPOS_POS), zeros_NextPOS_POS)
 
 		#print "x = ", x
 		loss_on_sentence = sum([max(0, (gamma - (np.dot((y - x[i]), w)))) for i in range(m)])
@@ -632,13 +722,15 @@ def update_ttable(filename):
 			zeros_parentPOS = np.zeros(len_parentPOS)
 			zeros_prev2 = np.zeros(len_prev2)
 			zeros_Next2 = np.zeros(len_Next2)
+			zeros_prevPOS_POS = np.zeros(len_prevPOS_POS)
+			zeros_NextPOS_POS = np.zeros(len_NextPOS_POS)
 
 			candidate = "src:" + source[:SL] + "_tgt:" + remove_accents(target[:SL])
 			#candidate_unacc = "src:" + source[:SL] + "_tgt:" + remove_accents(target[:SL])
 
 			if incomplete_phrase_ft_strings_dict.get(candidate, 0) != 0:
 				zeros_phr[incomplete_phrase_ft_strings_dict[candidate]] = 1
-		
+
 			if incomplete_prev_ft_strings_dict.get(candidate, 0) != 0:
 				zeros_prev[incomplete_prev_ft_strings_dict[candidate]] = 1
 			if incomplete_Next_ft_strings_dict.get(candidate, 0) != 0:
@@ -662,7 +754,12 @@ def update_ttable(filename):
 			if incomplete_Next2_ft_strings_dict.get(candidate, 0) != 0:
 				zeros_Next2[incomplete_Next2_ft_strings_dict[candidate]] = 1
 
-			features = np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(first_features, zeros_phr), zeros_prev), zeros_Next), zeros_other), zeros_prev_POS), zeros_Next_POS), zeros_parentrel), zeros_parentPOS), zeros_prev2), zeros_Next2)
+			if incomplete_prevPOS_POS_ft_strings_dict.get(candidate, 0) != 0:
+				zeros_prevPOS_POS[incomplete_prevPOS_POS_ft_strings_dict[candidate]] = 1
+			if incomplete_NextPOS_POS_ft_strings_dict.get(candidate, 0) != 0:
+				zeros_NextPOS_POS[incomplete_NextPOS_POS_ft_strings_dict[candidate]] = 1
+
+			features = np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(np.append(first_features, zeros_phr), zeros_prev), zeros_Next), zeros_other), zeros_prev_POS), zeros_Next_POS), zeros_parentrel), zeros_parentPOS), zeros_prev2), zeros_Next2), zeros_prevPOS_POS), zeros_NextPOS_POS)
 			features = scipy.sparse.csr_matrix(features)
 
 			translation_table[source][target] = features
